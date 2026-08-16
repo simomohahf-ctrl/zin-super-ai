@@ -229,6 +229,25 @@ let screenStream=null;
 let recognition=null,isListening=false;
 const $=id=>document.getElementById(id);
 
+// ===== IMAGE RESIZE HELPER (keeps vision model under TPM token limits) =====
+function resizeImageDataUrl(dataUrl, maxW=320, maxH=240, quality=0.45){
+  return new Promise((resolve)=>{
+    const img=new Image();
+    img.onload=()=>{
+      let w=img.width,h=img.height;
+      const ratio=Math.min(maxW/w,maxH/h,1);
+      w=Math.round(w*ratio);h=Math.round(h*ratio);
+      const canvas=document.createElement('canvas');
+      canvas.width=w;canvas.height=h;
+      canvas.getContext('2d').drawImage(img,0,0,w,h);
+      resolve(canvas.toDataURL('image/jpeg',quality));
+    };
+    img.onerror=()=>resolve(dataUrl);
+    img.src=dataUrl;
+  });
+}
+
+
 function switchMode(mode,btn){
   currentMode=mode;
   document.querySelectorAll('.mode-tab').forEach(t=>t.classList.remove('active'));
@@ -282,7 +301,7 @@ async function sendMessage(){
       message:text||(allImages.length>0?'حلل هاد الوسائط بالتفصيل':''),
       messages:chatHistory.slice(-10).map(m=>({role:m.role,content:m.content})),
       image:allImages.length>0?allImages[0]:null,
-      extraImages:allImages.length>1?allImages.slice(1,5):[],
+      extraImages:allImages.length>1?allImages.slice(1,2):[],
       temperature:mode==='reasoning'?0.3:0.7,
       maxTokens:mode==='reasoning'?8192:4096,
       systemExtra:mode==='reasoning'?'أنت في وضع التحليل المنطقي العميق. حلل خطوة بخطوة، اعرض منطقك، واعطي استنتاج واضح.':''
@@ -292,7 +311,7 @@ async function sendMessage(){
     const data=await res.json();
     $(tid).remove();
 
-    if(data.error)addAIMessage('⚠️ خطأ: '+data.error,'neutral');
+    if(data.error)addAIMessage(data.rateLimited?data.error:'⚠️ خطأ: '+data.error,'neutral');
     else{addAIMessage(data.reply,data.emotion,data.reasoning,data.model);chatHistory.push({role:'assistant',content:data.reply});}
   }catch(err){$(tid).remove();addAIMessage('⚠️ تعذر الاتصال: '+err.message,'neutral');}
   isProcessing=false;$('sendBtn').disabled=false;
@@ -316,8 +335,11 @@ function handleFileSelect(e){
     reader.readAsDataURL(file);
   }else if(file.type.startsWith('image/')){
     const reader=new FileReader();
-    reader.onload=ev=>{attachedImages.push(ev.target.result);renderAttachments();
-      if(currentMode==='chat')switchMode('vision',document.querySelectorAll('.mode-tab')[1]);};
+    reader.onload=async ev=>{
+      const resized=await resizeImageDataUrl(ev.target.result);
+      attachedImages.push(resized);renderAttachments();
+      if(currentMode==='chat')switchMode('vision',document.querySelectorAll('.mode-tab')[1]);
+    };
     reader.readAsDataURL(file);
   }
   e.target.value='';
@@ -333,7 +355,7 @@ function removeImg(i){attachedImages.splice(i,1);renderAttachments();}
 function removeVid(){attachedVideo=null;renderAttachments();}
 
 // ===== VIDEO FRAME EXTRACTION =====
-async function extractVideoFrames(videoDataUrl,maxFrames=4){
+async function extractVideoFrames(videoDataUrl,maxFrames=1){
   return new Promise((resolve)=>{
     const video=document.createElement('video');
     video.src=videoDataUrl;video.muted=true;video.playsInline=true;
@@ -343,15 +365,14 @@ async function extractVideoFrames(videoDataUrl,maxFrames=4){
       const times=[];
       const step=duration/(maxFrames+1);
       for(let i=1;i<=maxFrames;i++)times.push(step*i);
-      let idx=0;
       video.currentTime=times[0];
     });
     video.addEventListener('seeked',()=>{
       const canvas=document.createElement('canvas');
-      canvas.width=Math.min(video.videoWidth,640);
-      canvas.height=Math.min(video.videoHeight,480);
+      canvas.width=Math.min(video.videoWidth,320);
+      canvas.height=Math.min(video.videoHeight,240);
       canvas.getContext('2d').drawImage(video,0,0,canvas.width,canvas.height);
-      frames.push(canvas.toDataURL('image/jpeg',0.6));
+      frames.push(canvas.toDataURL('image/jpeg',0.4));
       const times=[];
       const step=video.duration/(maxFrames+1);
       for(let i=1;i<=maxFrames;i++)times.push(step*i);
@@ -403,9 +424,9 @@ function captureCameraFrame(){
   if(!camActive||!camStream)return null;
   const video=$('camVideo');
   const canvas=document.createElement('canvas');
-  canvas.width=640;canvas.height=480;
-  canvas.getContext('2d').drawImage(video,0,0,640,480);
-  return canvas.toDataURL('image/jpeg',0.6);
+  canvas.width=320;canvas.height=240;
+  canvas.getContext('2d').drawImage(video,0,0,320,240);
+  return canvas.toDataURL('image/jpeg',0.4);
 }
 
 // ===== SCREEN CAPTURE / SCREEN RECORDING =====
@@ -442,10 +463,9 @@ async function startScreenCapture(){
   }catch(e){showToast('⚠️ ماقدرنش نبدا تسجيل الشاشة: '+e.message);}
 }
 
-function captureFrame(){
+async function captureFrame(){
   const video=$('screenVideo');
   if(!video.srcObject){
-    // Try camera instead
     const camFrame=captureCameraFrame();
     if(camFrame){
       switchMode('vision',document.querySelectorAll('.mode-tab')[1]);
@@ -459,7 +479,8 @@ function captureFrame(){
   const canvas=document.createElement('canvas');
   canvas.width=video.videoWidth||640;canvas.height=video.videoHeight||480;
   canvas.getContext('2d').drawImage(video,0,0,canvas.width,canvas.height);
-  const frame=canvas.toDataURL('image/jpeg',0.8);
+  const fullFrame=canvas.toDataURL('image/jpeg',0.7);
+  const frame=await resizeImageDataUrl(fullFrame,320,240,0.4);
   switchMode('vision',document.querySelectorAll('.mode-tab')[1]);
   attachedImages.push(frame);renderAttachments();
   $('msgInput').value='حلل هاد الصورة من الشاشة بالتفصيل';
@@ -480,13 +501,13 @@ async function handleAnalyzeFile(e){
 
   try{
     if(file.type.startsWith('video/')){
-      showToast('🎬 جاري استخراج لقطات من الفيديو...');
+      showToast('🎬 جاري استخراج لقطة من الفيديو...');
       const reader=new FileReader();
       reader.onload=async ev=>{
-        const frames=await extractVideoFrames(ev.target.result,5);
-        if(frames.length===0){result.textContent='⚠️ ماقدرنش نستخرج لقطات من الفيديو';result.classList.add('show');return;}
+        const frames=await extractVideoFrames(ev.target.result,1);
+        if(frames.length===0){result.textContent='⚠️ ماقدرنش نستخرج لقطة من الفيديو';result.classList.add('show');return;}
         const res=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},
-          body:JSON.stringify({mode:'vision',message:'حلل هاد الفيديو. استخرجت لقطات متعددة. صف المحتوى، الحركة، السياق، واعطي تحليل شامل.',image:frames[0],extraImages:frames.slice(1,5),temperature:0.5})});
+          body:JSON.stringify({mode:'vision',message:'حلل هاد اللقطة المأخوذة من الفيديو. صف المحتوى، الحركة المحتملة، السياق، واعطي تحليل شامل.',image:frames[0],temperature:0.5})});
         const data=await res.json();
         result.innerHTML=formatMarkdown(data.reply||data.error||'ماقدرش نحلل الفيديو');
         result.classList.add('show');
@@ -495,8 +516,9 @@ async function handleAnalyzeFile(e){
     }else if(file.type.startsWith('image/')){
       const reader=new FileReader();
       reader.onload=async ev=>{
+        const resized=await resizeImageDataUrl(ev.target.result);
         const res=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},
-          body:JSON.stringify({mode:'vision',message:'حلل هاد الصورة بالتفصيل الكامل. صف كل شي، استنتج السياق، واعطي معلومات قيمة.',image:ev.target.result,temperature:0.5})});
+          body:JSON.stringify({mode:'vision',message:'حلل هاد الصورة بالتفصيل الكامل. صف كل شي، استنتج السياق، واعطي معلومات قيمة.',image:resized,temperature:0.5})});
         const data=await res.json();
         result.innerHTML=formatMarkdown(data.reply||data.error||'ماقدرش نحلل الصورة');
         result.classList.add('show');
