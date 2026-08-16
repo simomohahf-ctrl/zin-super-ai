@@ -8,12 +8,10 @@
 <meta name="mobile-web-app-capable" content="yes">
 <title>زين سوبر AI 🧠 — أقوى ذكاء اصطناعي</title>
 <style>
-:root{--bg:#0a0a1a;--bg2:#12122a;--card:#1a1a35;--card2:#22224a;--border:#2a2a55;--text:#e8e8ff;--muted:#7777aa;--accent:#6366f1;--accent2:#818cf8;--green:#22c55e;--red:#ef4444;--gold:#fbbf24;--pink:#ec4899;--radius:12px}
+:root{--bg:#0a0a1a;--bg2:#12122a;--card:#1a1a35;--card2:#22224a;--border:#2a2a55;--text:#e8e8ff;--muted:#7777aa;--accent:#6366f1;--accent2:#818cf8;--green:#22c55e;--red:#ef4444;--gold:#fbbf24;--pink:#ec4899}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
 .hidden{display:none!important}
-
-/* HEADER */
 .header{position:sticky;top:0;z-index:100;background:rgba(10,10,26,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:10px 12px}
 .h-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:10px}
 .h-logo{display:flex;align-items:center;gap:8px;font-size:1.1rem;font-weight:800}
@@ -22,18 +20,14 @@ body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:var(--bg);color:v
 .h-status{font-size:0.7rem;color:var(--green);display:flex;align-items:center;gap:4px}
 .h-status::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 1.5s infinite}
 .h-actions{margin-right:auto;display:flex;gap:6px}
-.h-btn{background:var(--card);border:1px solid var(--border);color:var(--text);width:40px;height:40px;border-radius:10px;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative}
+.h-btn{background:var(--card);border:1px solid var(--border);color:var(--text);width:40px;height:40px;border-radius:10px;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .h-btn:active{transform:scale(0.92)}
 .h-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
 .h-btn.recording{background:var(--red);border-color:var(--red);animation:pulse 1s infinite}
-
-/* MODE TABS */
 .modes{max-width:900px;margin:0 auto;padding:8px 12px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
 .modes::-webkit-scrollbar{display:none}
 .mode-tab{background:var(--card);border:1px solid var(--border);color:var(--muted);padding:7px 14px;border-radius:18px;font-size:0.8rem;cursor:pointer;white-space:nowrap;font-family:inherit;display:flex;align-items:center;gap:5px;flex-shrink:0}
 .mode-tab.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:var(--accent)}
-
-/* CHAT AREA */
 .chat-area{max-width:900px;margin:0 auto;padding:12px;padding-bottom:140px;min-height:calc(100vh - 200px)}
 .msg{margin-bottom:12px;display:flex;gap:8px;animation:fadeIn .3s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
@@ -46,62 +40,46 @@ body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:var(--bg);color:v
 .msg.user .msg-bubble{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-top-left-radius:4px}
 .msg-emotion{font-size:0.72rem;color:var(--muted);margin-top:4px;padding:0 4px}
 .msg-img{max-width:200px;border-radius:10px;margin-top:8px;width:100%}
+.msg-vid{max-width:200px;border-radius:10px;margin-top:8px;width:100%}
 .msg-reasoning{background:var(--bg2);border:1px dashed var(--border);border-radius:8px;padding:8px;margin-top:6px;font-size:0.78rem;color:var(--muted);max-height:200px;overflow-y:auto}
 .msg-reasoning summary{cursor:pointer;color:var(--accent2);font-weight:600;outline:none}
-
-/* TYPING INDICATOR */
 .typing{display:flex;gap:4px;padding:8px 0}
 .typing span{width:8px;height:8px;border-radius:50%;background:var(--accent);animation:blink 1.4s infinite}
 .typing span:nth-child(2){animation-delay:0.2s}
 .typing span:nth-child(3){animation-delay:0.4s}
 @keyframes blink{0%,60%,100%{opacity:0.3}30%{opacity:1}}
-
-/* WELCOME */
 .welcome{text-align:center;padding:40px 20px}
 .welcome .icon{font-size:4rem;margin-bottom:12px;animation:pulse 3s infinite}
 .welcome h1{font-size:1.5rem;margin-bottom:8px;background:linear-gradient(135deg,var(--accent),var(--pink),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .welcome p{color:var(--muted);font-size:0.88rem;max-width:400px;margin:0 auto 20px;line-height:1.6}
 .welcome-features{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;max-width:500px;margin:0 auto}
 .welcome-feat{background:var(--card);border:1px solid var(--border);padding:8px 14px;border-radius:20px;font-size:0.78rem;color:var(--muted)}
-
-/* INPUT AREA */
 .input-area{position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,26,0.98);backdrop-filter:blur(12px);border-top:1px solid var(--border);padding:10px 12px;z-index:100}
 .input-inner{max-width:900px;margin:0 auto;display:flex;gap:8px;align-items:flex-end}
 .attachments{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}
 .attach-prev{position:relative;width:60px;height:60px;border-radius:10px;overflow:hidden;border:1px solid var(--border)}
-.attach-prev img{width:100%;height:100%;object-fit:cover}
+.attach-prev img,.attach-prev video{width:100%;height:100%;object-fit:cover}
 .attach-prev .rm{position:absolute;top:2px;left:2px;background:rgba(0,0,0,0.7);color:#fff;border:none;width:20px;height:20px;border-radius:50%;cursor:pointer;font-size:0.8rem}
-.attach-prev video{width:100%;height:100%;object-fit:cover}
+.attach-prev .vtag{position:absolute;bottom:2px;right:2px;background:rgba(99,102,241,0.8);color:#fff;font-size:0.6rem;padding:1px 4px;border-radius:4px}
 .input-box{flex:1;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:8px 12px;display:flex;gap:8px;align-items:flex-end;min-height:44px}
 .input-box textarea{flex:1;background:transparent;border:none;color:var(--text);font-size:0.9rem;font-family:inherit;outline:none;resize:none;max-height:120px;line-height:1.5;min-height:28px}
 .input-box textarea::placeholder{color:var(--muted)}
 .input-btn{background:transparent;border:none;color:var(--muted);width:36px;height:36px;border-radius:10px;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .input-btn:active{transform:scale(0.9)}
-.input-btn:hover{color:var(--accent2)}
+.input-btn.rec{color:var(--red)!important;animation:pulse 1s infinite}
 .send-btn{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;width:44px;height:44px;border-radius:12px;cursor:pointer;font-size:1.3rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .send-btn:active{transform:scale(0.9)}
 .send-btn:disabled{opacity:0.5;cursor:wait}
-
-/* REC OVERLAY */
-.rec-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;display:none;flex-direction:column;align-items:center;justify-content:center}
-.rec-overlay.show{display:flex}
-.rec-overlay video{max-width:90%;max-height:70%;border-radius:12px;border:2px solid var(--red)}
-.rec-label{color:var(--red);font-size:1.2rem;font-weight:700;margin:12px 0;display:flex;align-items:center;gap:8px}
-.rec-label::before{content:'';width:12px;height:12px;border-radius:50%;background:var(--red);animation:pulse 1s infinite}
-
-/* SCREEN VIEW */
-.screen-view{position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:400;display:none;flex-direction:column;z-index:450}
+.screen-view{position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:450;display:none;flex-direction:column}
 .screen-view.show{display:flex}
 .screen-view-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--card);border-bottom:1px solid var(--border)}
 .screen-view-header h3{font-size:0.9rem}
-.screen-view video{flex:1;width:100%;object-fit:contain;background:#000}
-.screen-actions{padding:10px;display:flex;gap:8px;justify-content:center;background:var(--card);border-top:1px solid var(--border)}
-.screen-btn{padding:10px 20px;border-radius:10px;border:none;cursor:pointer;font-size:0.88rem;font-weight:600;font-family:inherit}
+.screen-view video{flex:1;width:100%;object-fit:contain;background:#000;max-height:60vh}
+.screen-actions{padding:10px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;background:var(--card);border-top:1px solid var(--border)}
+.screen-btn{padding:10px 16px;border-radius:10px;border:none;cursor:pointer;font-size:0.85rem;font-weight:600;font-family:inherit}
 .screen-btn.cap{background:var(--accent);color:#fff}
 .screen-btn.stop{background:var(--red);color:#fff}
 .screen-btn.close{background:var(--card2);color:var(--text);border:1px solid var(--border)}
-
-/* ANALYZE PANEL */
 .analyze-panel{max-width:900px;margin:0 auto;padding:12px;padding-bottom:140px}
 .analyze-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:12px}
 .analyze-card h3{font-size:1rem;margin-bottom:10px;display:flex;align-items:center;gap:6px}
@@ -109,11 +87,8 @@ body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:var(--bg);color:v
 .analyze-drop{border:2px dashed var(--border);border-radius:12px;padding:30px;text-align:center;cursor:pointer;transition:border-color .2s}
 .analyze-drop:hover{border-color:var(--accent)}
 .analyze-drop .icon{font-size:2.5rem;margin-bottom:8px}
-.analyze-drop p{color:var(--muted);font-size:0.85rem}
 .analyze-result{margin-top:12px;padding:14px;background:var(--bg2);border-radius:10px;font-size:0.88rem;line-height:1.7;white-space:pre-wrap;display:none}
 .analyze-result.show{display:block}
-
-/* EMOTION BADGE */
 .emotion-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:12px;font-size:0.72rem;font-weight:600}
 .emotion-badge.happy{background:rgba(34,197,94,0.15);color:var(--green)}
 .emotion-badge.sad{background:rgba(59,130,246,0.15);color:#60a5fa}
@@ -122,8 +97,6 @@ body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:var(--bg);color:v
 .emotion-badge.caring{background:rgba(236,72,153,0.15);color:var(--pink)}
 .emotion-badge.angry{background:rgba(239,68,68,0.15);color:var(--red)}
 .emotion-badge.neutral{background:rgba(119,119,170,0.15);color:var(--muted)}
-
-/* SETTINGS MODAL */
 .modal-ov{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:300;display:none;align-items:center;justify-content:center;padding:14px}
 .modal-ov.show{display:flex}
 .modal-card{background:var(--card);border:1px solid var(--border);border-radius:16px;max-width:400px;width:100%;padding:20px;max-height:85vh;overflow-y:auto}
@@ -131,7 +104,11 @@ body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:var(--bg);color:v
 .modal-close{float:left;background:var(--card2);border:none;color:var(--muted);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:1rem}
 .info-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.82rem}
 .info-row .v{color:var(--accent2);font-weight:600}
-
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--card2);border:1px solid var(--border);color:var(--text);padding:10px 20px;border-radius:20px;font-size:0.85rem;z-index:600;animation:fadeIn .3s;max-width:90%;text-align:center}
+.cam-view{position:fixed;bottom:80px;right:10px;width:120px;height:160px;border-radius:12px;overflow:hidden;border:2px solid var(--accent);z-index:100;display:none}
+.cam-view.show{display:block}
+.cam-view video{width:100%;height:100%;object-fit:cover}
+.cam-view .cam-close{position:absolute;top:4px;left:4px;background:rgba(0,0,0,0.6);border:none;color:#fff;width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:0.8rem}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.6}}
 @media(max-width:600px){.h-logo .title{display:none}.welcome h1{font-size:1.2rem}.msg-bubble{max-width:85%}}
 </style>
@@ -143,8 +120,8 @@ body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:var(--bg);color:v
 <div class="h-logo"><span class="brain">🧠</span><span class="title">ZIN SUPER AI</span></div>
 <div class="h-status">متصل</div>
 <div class="h-actions">
-<button class="h-btn" id="screenBtn" onclick="toggleScreen()" title="تسجيل الشاشة">🖥️</button>
-<button class="h-btn" id="micBtn" onclick="toggleMic()" title="رسالة صوتية">🎤</button>
+<button class="h-btn" id="screenBtn" onclick="openCaptureMenu()" title="التقاط">🖥️</button>
+<button class="h-btn" id="camBtn" onclick="toggleCamera()" title="كاميرا">📷</button>
 <button class="h-btn" onclick="showSettings()" title="الإعدادات">⚙️</button>
 </div>
 </div>
@@ -157,17 +134,17 @@ body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:var(--bg);color:v
 <button class="mode-tab" onclick="switchMode('analyze',this)">🔬 تحليل شامل</button>
 </div>
 
-<!-- CHAT / VISION / REASONING AREA -->
 <div id="chatArea" class="chat-area">
 <div class="welcome" id="welcome">
 <div class="icon">🧠</div>
 <h1>زين سوبر AI</h1>
-<p>أقوى ذكاء اصطناعي — يحلل الصور، يحل المشاكل، يسجل الشاشة، ويفهم مشاعرك. تكلم معاه كأنو صديق حقيقي.</p>
+<p>أقوى ذكاء اصطناعي — يحلل الصور والفيديوهات، يحل المشاكل، يسجل الشاشة، يسمع صوتك، ويفهم مشاعرك.</p>
 <div class="welcome-features">
 <span class="welcome-feat">🧠 GPT-OSS 120B</span>
 <span class="welcome-feat">👁️ Qwen Vision</span>
-<span class="welcome-feat">🎤 Whisper Audio</span>
+<span class="welcome-feat">🎤 إدخال صوتي</span>
 <span class="welcome-feat">🖥️ تسجيل شاشة</span>
+<span class="welcome-feat">🎬 تحليل فيديو</span>
 <span class="welcome-feat">💜 مشاعر حقيقية</span>
 <span class="welcome-feat">🧩 تحليل منطقي</span>
 </div>
@@ -175,21 +152,20 @@ body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:var(--bg);color:v
 <div id="messages"></div>
 </div>
 
-<!-- ANALYZE PANEL -->
 <div id="analyzePanel" class="analyze-panel hidden">
 <div class="analyze-card">
 <h3>🔬 تحليل شامل</h3>
-<p>ارفع أي صورة، نص، أو ملف و زين سوبر غادي يحللو بالتفصيل — يستعمل النموذج الأنسب لكل نوع.</p>
+<p>ارفع أي صورة، فيديو، نص، أو ملف و زين سوبر غادي يحللو بالتفصيل.</p>
 <div class="analyze-drop" onclick="document.getElementById('analyzeFile').click()">
 <div class="icon">📁</div>
-<p>اضغط لاختيار ملف (صورة، نص، PDF...) أو اسحب الملف هنا</p>
-<input type="file" id="analyzeFile" accept="image/*,text/*,.txt,.md,.json,.csv" style="display:none" onchange="handleAnalyzeFile(event)">
+<p>اضغط لاختيار ملف (صورة، فيديو، نص، PDF...) أو اسحب الملف هنا</p>
+<input type="file" id="analyzeFile" accept="image/*,video/*,text/*,.txt,.md,.json,.csv" style="display:none" onchange="handleAnalyzeFile(event)">
 </div>
 <div class="analyze-result" id="analyzeResult"></div>
 </div>
 <div class="analyze-card">
 <h3>💬 سؤال تحليلي</h3>
-<p>اكتب أي سؤال و زين سوبر يحللو بـ GPT-OSS 120B (أقوى نموذج منطقي).</p>
+<p>اكتب أي سؤال و زين سوبر يحللو بـ GPT-OSS 120B.</p>
 <div style="display:flex;gap:8px;margin-top:10px">
 <input type="text" id="analyzeQuestion" placeholder="اكتب سؤالك هنا..." style="flex:1;background:var(--bg2);border:1px solid var(--border);color:var(--text);border-radius:10px;padding:10px;font-size:0.88rem;font-family:inherit;outline:none">
 <button class="send-btn" onclick="analyzeQuestion()">🔍</button>
@@ -197,397 +173,381 @@ body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:var(--bg);color:v
 </div>
 </div>
 
-<!-- INPUT -->
 <div class="input-area" id="inputArea">
 <div class="input-inner">
 <div style="display:flex;flex-direction:column;flex:1">
 <div class="attachments" id="attachments"></div>
 <div class="input-box">
-<button class="input-btn" onclick="document.getElementById('fileInput').click()" title="إرفاق صورة">📎</button>
-<input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFileSelect(event)">
+<button class="input-btn" onclick="document.getElementById('fileInput').click()" title="إرفاق صورة أو فيديو">📎</button>
+<input type="file" id="fileInput" accept="image/*,video/*" style="display:none" onchange="handleFileSelect(event)">
 <textarea id="msgInput" placeholder="اكتب رسالتك لزين سوبر..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage()}" rows="1" oninput="autoResize(this)"></textarea>
-<button class="input-btn" id="micInputBtn" onclick="startVoiceInput()" title="إدخال صوتي">🎙️</button>
+<button class="input-btn" id="micInputBtn" onclick="toggleVoiceInput()" title="إدخال صوتي">🎤</button>
 </div>
 </div>
 <button class="send-btn" id="sendBtn" onclick="sendMessage()">➤</button>
 </div>
 </div>
 
-<!-- SCREEN RECORDING VIEW -->
+<div class="cam-view" id="camView">
+<button class="cam-close" onclick="toggleCamera()">✕</button>
+<video id="camVideo" autoplay playsinline muted></video>
+</div>
+
 <div class="screen-view" id="screenView">
 <div class="screen-view-header">
-<h3>🖥️ تسجيل الشاشة الحية</h3>
+<h3 id="captureTitle">🖥️ التقاط الشاشة</h3>
 <button class="screen-btn close" onclick="closeScreenView()">✕</button>
 </div>
 <video id="screenVideo" autoplay muted playsinline></video>
 <div class="screen-actions">
-<button class="screen-btn cap" id="captureBtn" onclick="captureScreen()">📸 التقاط وتحليل</button>
-<button class="screen-btn stop" id="stopRecBtn" onclick="stopScreenRecord()">⏹️ إيقاف</button>
+<button class="screen-btn cap" id="captureBtn" onclick="captureFrame()">📸 التقاط وتحليل</button>
+<button class="screen-btn stop" id="stopRecBtn" onclick="closeScreenView()">⏹️ إيقاف</button>
 </div>
 </div>
 
-<!-- SETTINGS MODAL -->
 <div class="modal-ov" id="settingsModal" onclick="if(event.target===this)closeSettings()">
 <div class="modal-card">
 <button class="modal-close" onclick="closeSettings()">✕</button>
 <h2>⚙️ معلومات النماذج</h2>
 <div class="info-row"><span>النموذج الرئيسي</span><span class="v">GPT-OSS 120B</span></div>
 <div class="info-row"><span>نموذج الرؤية</span><span class="v">Qwen 3.6-27B</span></div>
-<div class="info-row"><span>نموذج الصوت</span><span class="v">Whisper Large V3</span></div>
-<div class="info-row"><span>السياق (Context)</span><span class="v">131,072 token</span></div>
+<div class="info-row"><span>الإدخال الصوتي</span><span class="v">Web Speech API</span></div>
+<div class="info-row"><span>السياق</span><span class="v">131,072 token</span></div>
 <div class="info-row"><span>المشاعر</span><span class="v">✅ مفعلة</span></div>
-<div class="info-row"><span>التحليل المنطقي</span><span class="v">✅ مفعلة</span></div>
+<div class="info-row"><span>تحليل الفيديو</span><span class="v">✅ مفعلة</span></div>
 <div class="info-row"><span>تسجيل الشاشة</span><span class="v">✅ مفعلة</span></div>
-<div class="info-row"><span>المزود</span><span class="v">Groq Cloud</span></div>
-<div class="info-row"><span>الإصدار</span><span class="v">ZIN SUPER AI v1.0</span></div>
+<div class="info-row"><span>الإصدار</span><span class="v">ZIN SUPER AI v2.0</span></div>
 </div>
 </div>
 
 <script>
-const API_URL = 'https://base44.app/api/apps/6a1082479423d64dfa027604/functions/zinSuperAI';
-let currentMode = 'chat';
-let chatHistory = [];
-let isProcessing = false;
-let attachedImages = [];
-let mediaRecorder = null;
-let audioChunks = [];
-let isRecordingVoice = false;
-let screenStream = null;
-let screenRecorder = null;
-let screenChunks = [];
+const API_URL='https://base44.app/api/apps/6a1082479423d64dfa027604/functions/zinSuperAI';
+let currentMode='chat',chatHistory=[],isProcessing=false;
+let attachedImages=[],attachedVideo=null;
+let camStream=null,camActive=false;
+let screenStream=null;
+let recognition=null,isListening=false;
+const $=id=>document.getElementById(id);
 
-// ===== MODE SWITCHING =====
-function switchMode(mode, btn) {
-  currentMode = mode;
-  document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-  
-  const chatArea = document.getElementById('chatArea');
-  const analyzePanel = document.getElementById('analyzePanel');
-  
-  if (mode === 'analyze') {
-    chatArea.classList.add('hidden');
-    analyzePanel.classList.remove('hidden');
-  } else {
-    chatArea.classList.remove('hidden');
-    analyzePanel.classList.add('hidden');
-    if (mode === 'vision') {
-      document.getElementById('msgInput').placeholder = 'صف الصورة اللي بغيتي تحلل، ولا ارفع صورة واطرح سؤال...';
-    } else if (mode === 'reasoning') {
-      document.getElementById('msgInput').placeholder = 'اطرح أي مشكل أو سؤال معقد لتحليل منطقي عميق...';
-    } else {
-      document.getElementById('msgInput').placeholder = 'اكتب رسالتك لزين سوبر...';
-    }
+function switchMode(mode,btn){
+  currentMode=mode;
+  document.querySelectorAll('.mode-tab').forEach(t=>t.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  const ca=$('chatArea'),ap=$('analyzePanel');
+  if(mode==='analyze'){ca.classList.add('hidden');ap.classList.remove('hidden');}
+  else{ca.classList.remove('hidden');ap.classList.add('hidden');
+    if(mode==='vision')$('msgInput').placeholder='صف الصورة اللي بغيتي تحلل، ولا ارفع صورة واطرح سؤال...';
+    else if(mode==='reasoning')$('msgInput').placeholder='اطرح أي مشكل أو سؤال معقد لتحليل منطقي عميق...';
+    else $('msgInput').placeholder='اكتب رسالتك لزين سوبر...';
   }
 }
 
 // ===== SEND MESSAGE =====
-async function sendMessage() {
-  const input = document.getElementById('msgInput');
-  const text = input.value.trim();
-  if (!text && attachedImages.length === 0) return;
-  if (isProcessing) return;
-  
-  document.getElementById('welcome').classList.add('hidden');
-  isProcessing = true;
-  document.getElementById('sendBtn').disabled = true;
-  
-  // Build user message
-  let userContent = text || '(صورة بدون نص)';
-  const userMsgHTML = `<div class="msg user"><div class="msg-avatar">أنت</div><div class="msg-bubble">${escapeHtml(text)}${attachedImages.map(img => `<img class="msg-img" src="${img}">`).join('')}</div></div>`;
-  document.getElementById('messages').insertAdjacentHTML('beforeend', userMsgHTML);
-  
-  // Determine mode
-  let mode = currentMode;
-  if (mode === 'analyze') mode = 'chat';
-  if (attachedImages.length > 0 && mode === 'chat') mode = 'vision';
-  if (attachedImages.length > 0) mode = 'vision';
-  
-  // Add to history
-  chatHistory.push({ role: 'user', content: userContent });
-  
-  // Clear input
-  input.value = '';
-  autoResize(input);
-  const images = [...attachedImages];
-  attachedImages = [];
-  document.getElementById('attachments').innerHTML = '';
-  
-  // Show typing
-  const typingId = 'typing-' + Date.now();
-  document.getElementById('messages').insertAdjacentHTML('beforeend', `<div class="msg ai" id="${typingId}"><div class="msg-avatar">🧠</div><div class="msg-bubble"><div class="typing"><span></span><span></span><span></span></div></div></div>`);
+async function sendMessage(){
+  const text=$('msgInput').value.trim();
+  if(!text&&attachedImages.length===0&&!attachedVideo)return;
+  if(isProcessing)return;
+  $('welcome').classList.add('hidden');
+  isProcessing=true;$('sendBtn').disabled=true;
+
+  let userHTML=`<div class="msg user"><div class="msg-avatar">أنت</div><div class="msg-bubble">${escapeHtml(text)}`;
+  if(attachedImages.length)userHTML+=attachedImages.map(img=>`<img class="msg-img" src="${img}">`).join('');
+  if(attachedVideo)userHTML+=`<video class="msg-vid" src="${attachedVideo}" controls></video>`;
+  userHTML+=`</div></div>`;
+  $('messages').insertAdjacentHTML('beforeend',userHTML);
+
+  let mode=currentMode==='analyze'?'chat':currentMode;
+  if(attachedImages.length>0||attachedVideo)mode='vision';
+
+  chatHistory.push({role:'user',content:text||'(وسائط)'});
+  $('msgInput').value='';autoResize($('msgInput'));
+  const imgs=[...attachedImages],vid=attachedVideo;
+  attachedImages=[];attachedVideo=null;$('attachments').innerHTML='';
+
+  const tid='t-'+Date.now();
+  $('messages').insertAdjacentHTML('beforeend',`<div class="msg ai" id="${tid}"><div class="msg-avatar">🧠</div><div class="msg-bubble"><div class="typing"><span></span><span></span><span></span></div></div></div>`);
   scrollChat();
-  
-  try {
-    const body = {
-      mode: mode,
-      message: text || 'حلل هاد الصورة',
-      messages: chatHistory.slice(-10).map(m => ({ role: m.role, content: m.content })),
-      image: images.length > 0 ? images[0] : null,
-      temperature: mode === 'reasoning' ? 0.3 : 0.7,
-      maxTokens: mode === 'reasoning' ? 8192 : 4096,
-      systemExtra: mode === 'reasoning' ? 'أنت في وضع التحليل المنطقي العميق. حلل خطوة بخطوة، اعرض منطقك، واعطي استنتاج واضح.' : ''
-    };
-    
-    const res = await fetch(API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    });
-    
-    const data = await res.json();
-    document.getElementById(typingId).remove();
-    
-    if (data.error) {
-      addAIMessage('⚠️ خطأ: ' + data.error, 'neutral');
-    } else {
-      addAIMessage(data.reply, data.emotion, data.reasoning, data.model);
-      chatHistory.push({ role: 'assistant', content: data.reply });
+
+  try{
+    // If video, extract frames first
+    let allImages=[...imgs];
+    if(vid){
+      showToast('🎬 جاري استخراج لقطات من الفيديو...');
+      const frames=await extractVideoFrames(vid);
+      allImages=allImages.concat(frames);
     }
-  } catch (err) {
-    document.getElementById(typingId).remove();
-    addAIMessage('⚠️ تعذر الاتصال بالخادم. تأكد من اتصالك بالإنترنت.', 'neutral');
-  }
-  
-  isProcessing = false;
-  document.getElementById('sendBtn').disabled = false;
-}
 
-function addAIMessage(text, emotion, reasoning, model) {
-  const emotionLabels = {happy:'😊 سعيد',sad:'😢 حزين',excited:'🔥 متحمس',curious:'🤔 فضولي',caring:'❤️ متعاطف',angry:'😡 غاضب',neutral:'💭 محايد'};
-  const reasoningHtml = reasoning ? `<details class="msg-reasoning"><summary>🧠 المنطق الداخلي (${reasoning.length} حرف)</summary>${escapeHtml(reasoning)}</details>` : '';
-  const modelBadge = model ? `<div style="font-size:0.68rem;color:var(--muted);margin-top:4px">⚡ ${model}</div>` : '';
-  
-  const html = `<div class="msg ai"><div class="msg-avatar">🧠</div><div><div class="msg-bubble">${formatMarkdown(text)}</div><div class="msg-emotion"><span class="emotion-badge ${emotion}">${emotionLabels[emotion] || '💭 محايد'}</span></div>${reasoningHtml}${modelBadge}</div></div>`;
-  document.getElementById('messages').insertAdjacentHTML('beforeend', html);
-  scrollChat();
-}
-
-// ===== FILE ATTACHMENT =====
-function handleFileSelect(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = function(ev) {
-    attachedImages.push(ev.target.result);
-    renderAttachments();
-    if (currentMode === 'chat') switchMode('vision', document.querySelectorAll('.mode-tab')[1]);
-  };
-  reader.readAsDataURL(file);
-}
-
-function renderAttachments() {
-  const container = document.getElementById('attachments');
-  container.innerHTML = attachedImages.map((img, i) => 
-    `<div class="attach-prev"><img src="${img}"><button class="rm" onclick="removeAttachment(${i})">✕</button></div>`
-  ).join('');
-}
-
-function removeAttachment(i) {
-  attachedImages.splice(i, 1);
-  renderAttachments();
-}
-
-// ===== VOICE INPUT =====
-async function startVoiceInput() {
-  if (isRecordingVoice) return;
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    audioChunks = [];
-    mediaRecorder = new MediaRecorder(stream);
-    mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
-    mediaRecorder.onstop = async () => {
-      stream.getTracks().forEach(t => t.stop());
-      document.getElementById('micInputBtn').textContent = '🎙️';
-      document.getElementById('micInputBtn').style.color = '';
-      isRecordingVoice = false;
-      
-      // Transcribe
-      const blob = new Blob(audioChunks, { type: 'audio/webm' });
-      const reader = new FileReader();
-      reader.onload = async function(ev) {
-        const base64 = ev.target.result.split(',')[1];
-        document.getElementById('micInputBtn').textContent = '⏳';
-        try {
-          const res = await fetch(API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ mode: 'audio', audio: base64, audioType: 'audio/webm', language: 'ar' })
-          });
-          const data = await res.json();
-          if (data.text) {
-            document.getElementById('msgInput').value = data.text;
-            autoResize(document.getElementById('msgInput'));
-          }
-        } catch(e) { console.error(e); }
-        document.getElementById('micInputBtn').textContent = '🎙️';
-      };
-      reader.readAsDataURL(blob);
+    const body={
+      mode:mode,
+      message:text||(allImages.length>0?'حلل هاد الوسائط بالتفصيل':''),
+      messages:chatHistory.slice(-10).map(m=>({role:m.role,content:m.content})),
+      image:allImages.length>0?allImages[0]:null,
+      extraImages:allImages.length>1?allImages.slice(1,5):[],
+      temperature:mode==='reasoning'?0.3:0.7,
+      maxTokens:mode==='reasoning'?8192:4096,
+      systemExtra:mode==='reasoning'?'أنت في وضع التحليل المنطقي العميق. حلل خطوة بخطوة، اعرض منطقك، واعطي استنتاج واضح.':''
     };
-    mediaRecorder.start();
-    isRecordingVoice = true;
-    document.getElementById('micInputBtn').textContent = '⏹️';
-    document.getElementById('micInputBtn').style.color = 'var(--red)';
-  } catch(e) {
-    alert('ماقدرنش نفتح الميكرو. تأكد من السماح بالوصول.');
+
+    const res=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    const data=await res.json();
+    $(tid).remove();
+
+    if(data.error)addAIMessage('⚠️ خطأ: '+data.error,'neutral');
+    else{addAIMessage(data.reply,data.emotion,data.reasoning,data.model);chatHistory.push({role:'assistant',content:data.reply});}
+  }catch(err){$(tid).remove();addAIMessage('⚠️ تعذر الاتصال: '+err.message,'neutral');}
+  isProcessing=false;$('sendBtn').disabled=false;
+}
+
+function addAIMessage(text,emotion,reasoning,model){
+  const labels={happy:'😊 سعيد',sad:'😢 حزين',excited:'🔥 متحمس',curious:'🤔 فضولي',caring:'❤️ متعاطف',angry:'😡 غاضب',neutral:'💭 محايد'};
+  const rHtml=reasoning?`<details class="msg-reasoning"><summary>🧠 المنطق الداخلي</summary>${escapeHtml(reasoning)}</details>`:'';
+  const mBadge=model?`<div style="font-size:0.68rem;color:var(--muted);margin-top:4px">⚡ ${model}</div>`:'';
+  const html=`<div class="msg ai"><div class="msg-avatar">🧠</div><div><div class="msg-bubble">${formatMarkdown(text)}</div><div class="msg-emotion"><span class="emotion-badge ${emotion}">${labels[emotion]||'💭'}</span></div>${rHtml}${mBadge}</div></div>`;
+  $('messages').insertAdjacentHTML('beforeend',html);scrollChat();
+}
+
+// ===== FILE ATTACHMENT (images + videos) =====
+function handleFileSelect(e){
+  const file=e.target.files[0];if(!file)return;
+  if(file.type.startsWith('video/')){
+    const reader=new FileReader();
+    reader.onload=ev=>{attachedVideo=ev.target.result;renderAttachments();
+      if(currentMode==='chat')switchMode('vision',document.querySelectorAll('.mode-tab')[1]);};
+    reader.readAsDataURL(file);
+  }else if(file.type.startsWith('image/')){
+    const reader=new FileReader();
+    reader.onload=ev=>{attachedImages.push(ev.target.result);renderAttachments();
+      if(currentMode==='chat')switchMode('vision',document.querySelectorAll('.mode-tab')[1]);};
+    reader.readAsDataURL(file);
+  }
+  e.target.value='';
+}
+
+function renderAttachments(){
+  const c=$('attachments');
+  let html=attachedImages.map((img,i)=>`<div class="attach-prev"><img src="${img}"><button class="rm" onclick="removeImg(${i})">✕</button></div>`).join('');
+  if(attachedVideo)html+=`<div class="attach-prev"><video src="${attachedVideo}"></video><span class="vtag">VIDEO</span><button class="rm" onclick="removeVid()">✕</button></div>`;
+  c.innerHTML=html;
+}
+function removeImg(i){attachedImages.splice(i,1);renderAttachments();}
+function removeVid(){attachedVideo=null;renderAttachments();}
+
+// ===== VIDEO FRAME EXTRACTION =====
+async function extractVideoFrames(videoDataUrl,maxFrames=4){
+  return new Promise((resolve)=>{
+    const video=document.createElement('video');
+    video.src=videoDataUrl;video.muted=true;video.playsInline=true;
+    const frames=[];
+    video.addEventListener('loadedmetadata',()=>{
+      const duration=video.duration;
+      const times=[];
+      const step=duration/(maxFrames+1);
+      for(let i=1;i<=maxFrames;i++)times.push(step*i);
+      let idx=0;
+      video.currentTime=times[0];
+    });
+    video.addEventListener('seeked',()=>{
+      const canvas=document.createElement('canvas');
+      canvas.width=Math.min(video.videoWidth,640);
+      canvas.height=Math.min(video.videoHeight,480);
+      canvas.getContext('2d').drawImage(video,0,0,canvas.width,canvas.height);
+      frames.push(canvas.toDataURL('image/jpeg',0.6));
+      const times=[];
+      const step=video.duration/(maxFrames+1);
+      for(let i=1;i<=maxFrames;i++)times.push(step*i);
+      if(frames.length<maxFrames){video.currentTime=times[frames.length];}
+      else{resolve(frames);}
+    });
+    video.addEventListener('error',()=>resolve(frames));
+    setTimeout(()=>resolve(frames),15000);
+  });
+}
+
+// ===== VOICE INPUT (Web Speech API) =====
+function toggleVoiceInput(){
+  if(isListening){stopVoiceInput();return;}
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){showToast('🎤 المتصفح ما كيدعمش الإدخال الصوتي. جرّب Chrome.');return;}
+  recognition=new SR();
+  recognition.lang='ar-SA';recognition.continuous=false;recognition.interimResults=true;
+  recognition.onstart=()=>{isListening=true;$('micInputBtn').classList.add('rec');$('micInputBtn').textContent='⏹️';showToast('🎙️ كنسمعك... هضر دابا');};
+  recognition.onresult=e=>{
+    let txt='';
+    for(let i=e.resultIndex;i<e.results.length;i++)txt+=e.results[i][0].transcript;
+    $('msgInput').value=txt;autoResize($('msgInput'));
+  };
+  recognition.onerror=e=>{showToast('⚠️ خطأ فالميكرو: '+e.error);stopVoiceInput();};
+  recognition.onend=()=>stopVoiceInput();
+  try{recognition.start();}catch(e){showToast('⚠️ ماقدرنش نشغل الميكرو');}
+}
+function stopVoiceInput(){
+  if(recognition){try{recognition.stop();}catch(e){}}
+  isListening=false;$('micInputBtn').classList.remove('rec');$('micInputBtn').textContent='🎤';
+}
+
+// ===== CAMERA =====
+async function toggleCamera(){
+  if(camActive){stopCamera();return;}
+  try{
+    camStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:640},height:{ideal:480}},audio:false});
+    $('camVideo').srcObject=camStream;$('camView').classList.add('show');
+    $('camBtn').classList.add('active');camActive=true;
+    showToast('📷 الكاميرا تفعّلات — اضغط 📸 فالأعلى باش تلقط وتحلل');
+  }catch(e){showToast('⚠️ ماقدرنش نشغل الكاميرا: '+e.message);}
+}
+function stopCamera(){
+  if(camStream){camStream.getTracks().forEach(t=>t.stop());camStream=null;}
+  $('camView').classList.remove('show');$('camBtn').classList.remove('active');camActive=false;
+}
+function captureCameraFrame(){
+  if(!camActive||!camStream)return null;
+  const video=$('camVideo');
+  const canvas=document.createElement('canvas');
+  canvas.width=640;canvas.height=480;
+  canvas.getContext('2d').drawImage(video,0,0,640,480);
+  return canvas.toDataURL('image/jpeg',0.6);
+}
+
+// ===== SCREEN CAPTURE / SCREEN RECORDING =====
+function openCaptureMenu(){
+  const isMobile=/Android|iPhone|iPad/i.test(navigator.userAgent);
+  if(isMobile){
+    // On mobile: use camera as "live view"
+    if(camActive){
+      const frame=captureCameraFrame();
+      if(frame){
+        switchMode('vision',document.querySelectorAll('.mode-tab')[1]);
+        attachedImages.push(frame);renderAttachments();
+        $('msgInput').value='حلل هاد الصورة من الكاميرا بالتفصيل';
+        showToast('📸 تم التقاط صورة من الكاميرا');
+      }
+    }else{
+      toggleCamera();
+      showToast('📷 الكاميرا هي البديل لتسجيل الشاشة على الهاتف. صور الشي اللي بغيتي تحللو.');
+    }
+  }else{
+    // Desktop: use getDisplayMedia for screen recording
+    startScreenCapture();
   }
 }
 
-// ===== MIC BUTTON (header) =====
-function toggleMic() {
-  startVoiceInput();
+async function startScreenCapture(){
+  try{
+    screenStream=await navigator.mediaDevices.getDisplayMedia({video:{cursor:'always'},audio:false});
+    $('screenVideo').srcObject=screenStream;
+    $('captureTitle').textContent='🖥️ تسجيل الشاشة الحية';
+    $('screenView').classList.add('show');
+    $('screenBtn').classList.add('recording');
+    screenStream.getVideoTracks()[0].onended=()=>closeScreenView();
+  }catch(e){showToast('⚠️ ماقدرنش نبدا تسجيل الشاشة: '+e.message);}
 }
 
-// ===== SCREEN RECORDING =====
-async function toggleScreen() {
-  if (screenStream) {
-    closeScreenView();
+function captureFrame(){
+  const video=$('screenVideo');
+  if(!video.srcObject){
+    // Try camera instead
+    const camFrame=captureCameraFrame();
+    if(camFrame){
+      switchMode('vision',document.querySelectorAll('.mode-tab')[1]);
+      attachedImages.push(camFrame);renderAttachments();
+      $('msgInput').value='حلل هاد الصورة بالتفصيل';
+      closeScreenView();
+      showToast('📸 تم التقاط الصورة');
+    }else{showToast('⚠️ ماكاينش شي حاجة باش نلتقطها');}
     return;
   }
-  try {
-    screenStream = await navigator.mediaDevices.getDisplayMedia({ video: { cursor: 'always' }, audio: false });
-    const video = document.getElementById('screenVideo');
-    video.srcObject = screenStream;
-    document.getElementById('screenView').classList.add('show');
-    document.getElementById('screenBtn').classList.add('recording');
-    
-    screenStream.getVideoTracks()[0].onended = () => {
-      closeScreenView();
-    };
-  } catch(e) {
-    alert('ماقدرنش نبدا تسجيل الشاشة. تأكد من السماح بالوصول.');
-  }
-}
-
-function closeScreenView() {
-  if (screenStream) {
-    screenStream.getTracks().forEach(t => t.stop());
-    screenStream = null;
-  }
-  document.getElementById('screenView').classList.remove('show');
-  document.getElementById('screenBtn').classList.remove('recording');
-}
-
-async function captureScreen() {
-  const video = document.getElementById('screenVideo');
-  const canvas = document.createElement('canvas');
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
-  canvas.getContext('2d').drawImage(video, 0, 0);
-  const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
-  
-  // Switch to vision mode and analyze
-  switchMode('vision', document.querySelectorAll('.mode-tab')[1]);
-  attachedImages.push(dataUrl);
-  renderAttachments();
-  document.getElementById('msgInput').value = 'حلل هاد الصورة من الشاشة بالتفصيل';
+  const canvas=document.createElement('canvas');
+  canvas.width=video.videoWidth||640;canvas.height=video.videoHeight||480;
+  canvas.getContext('2d').drawImage(video,0,0,canvas.width,canvas.height);
+  const frame=canvas.toDataURL('image/jpeg',0.8);
+  switchMode('vision',document.querySelectorAll('.mode-tab')[1]);
+  attachedImages.push(frame);renderAttachments();
+  $('msgInput').value='حلل هاد الصورة من الشاشة بالتفصيل';
   closeScreenView();
+  showToast('📸 تم التقاط الشاشة');
 }
 
-function stopScreenRecord() {
-  closeScreenView();
+function closeScreenView(){
+  if(screenStream){screenStream.getTracks().forEach(t=>t.stop());screenStream=null;}
+  $('screenView').classList.remove('show');$('screenBtn').classList.remove('recording');
 }
 
 // ===== ANALYZE PANEL =====
-async function handleAnalyzeFile(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  const result = document.getElementById('analyzeResult');
-  result.classList.remove('show');
-  result.textContent = '⏳ جاري التحليل...';
-  result.classList.add('show');
-  
-  try {
-    if (file.type.startsWith('image/')) {
-      const reader = new FileReader();
-      reader.onload = async function(ev) {
-        const res = await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ mode: 'vision', message: 'حلل هاد الصورة بالتفصيل الكامل. صف كل شي تشوفو، استنتج السياق، واعطي معلومات قيمة.', image: ev.target.result, temperature: 0.5 })
-        });
-        const data = await res.json();
-        result.textContent = data.reply || data.error || 'ماقدرنش نحلل الصورة';
+async function handleAnalyzeFile(e){
+  const file=e.target.files[0];if(!file)return;
+  const result=$('analyzeResult');
+  result.textContent='⏳ جاري التحليل...';result.classList.add('show');
+
+  try{
+    if(file.type.startsWith('video/')){
+      showToast('🎬 جاري استخراج لقطات من الفيديو...');
+      const reader=new FileReader();
+      reader.onload=async ev=>{
+        const frames=await extractVideoFrames(ev.target.result,5);
+        if(frames.length===0){result.textContent='⚠️ ماقدرنش نستخرج لقطات من الفيديو';result.classList.add('show');return;}
+        const res=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({mode:'vision',message:'حلل هاد الفيديو. استخرجت لقطات متعددة. صف المحتوى، الحركة، السياق، واعطي تحليل شامل.',image:frames[0],extraImages:frames.slice(1,5),temperature:0.5})});
+        const data=await res.json();
+        result.innerHTML=formatMarkdown(data.reply||data.error||'ماقدرش نحلل الفيديو');
         result.classList.add('show');
       };
       reader.readAsDataURL(file);
-    } else {
-      const text = await file.text();
-      const res = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ mode: 'reasoning', message: 'حلل هاد المحتوى بالتفصيل:\n\n' + text.substring(0, 5000), temperature: 0.3, maxTokens: 8192 })
-      });
-      const data = await res.json();
-      result.textContent = data.reply || data.error || 'ماقدرش نحلل المحتوى';
+    }else if(file.type.startsWith('image/')){
+      const reader=new FileReader();
+      reader.onload=async ev=>{
+        const res=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({mode:'vision',message:'حلل هاد الصورة بالتفصيل الكامل. صف كل شي، استنتج السياق، واعطي معلومات قيمة.',image:ev.target.result,temperature:0.5})});
+        const data=await res.json();
+        result.innerHTML=formatMarkdown(data.reply||data.error||'ماقدرش نحلل الصورة');
+        result.classList.add('show');
+      };
+      reader.readAsDataURL(file);
+    }else{
+      const text=await file.text();
+      const res=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({mode:'reasoning',message:'حلل هاد المحتوى بالتفصيل:\n\n'+text.substring(0,5000),temperature:0.3,maxTokens:8192})});
+      const data=await res.json();
+      result.innerHTML=formatMarkdown(data.reply||data.error||'ماقدرش نحلل المحتوى');
       result.classList.add('show');
     }
-  } catch(e) {
-    result.textContent = '⚠️ خطأ: ' + e.message;
-    result.classList.add('show');
-  }
+  }catch(e){result.textContent='⚠️ خطأ: '+e.message;result.classList.add('show');}
+  e.target.value='';
 }
 
-async function analyzeQuestion() {
-  const q = document.getElementById('analyzeQuestion').value.trim();
-  if (!q) return;
-  const result = document.getElementById('analyzeResult');
-  result.textContent = '⏳ جاري التحليل...';
-  result.classList.add('show');
-  
-  try {
-    const res = await fetch(API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ mode: 'reasoning', message: q, temperature: 0.3, maxTokens: 8192 })
-    });
-    const data = await res.json();
-    result.innerHTML = formatMarkdown(data.reply || data.error || 'ماقدرش نحلل السؤال');
+async function analyzeQuestion(){
+  const q=$('analyzeQuestion').value.trim();if(!q)return;
+  const result=$('analyzeResult');
+  result.textContent='⏳ جاري التحليل...';result.classList.add('show');
+  try{
+    const res=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({mode:'reasoning',message:q,temperature:0.3,maxTokens:8192})});
+    const data=await res.json();
+    result.innerHTML=formatMarkdown(data.reply||data.error||'ماقدرش نحلل');
     result.classList.add('show');
-  } catch(e) {
-    result.textContent = '⚠️ خطأ: ' + e.message;
-    result.classList.add('show');
-  }
+  }catch(e){result.textContent='⚠️ خطأ: '+e.message;result.classList.add('show');}
 }
-
-// ===== SETTINGS =====
-function showSettings() { document.getElementById('settingsModal').classList.add('show'); }
-function closeSettings() { document.getElementById('settingsModal').classList.remove('show'); }
 
 // ===== HELPERS =====
-function autoResize(el) {
-  el.style.height = 'auto';
-  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
-}
-
-function scrollChat() {
-  const area = document.getElementById('chatArea');
-  area.scrollTop = area.scrollHeight;
-}
-
-function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text || '';
-  return div.innerHTML;
-}
-
-function formatMarkdown(text) {
-  if (!text) return '';
-  let html = escapeHtml(text);
-  // Bold
-  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-  // Italic
-  html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
-  // Code blocks
-  html = html.replace(/```([\s\S]+?)```/g, '<pre style="background:var(--bg2);padding:8px;border-radius:8px;overflow-x:auto;font-size:0.82rem;margin:6px 0">$1</pre>');
-  // Inline code
-  html = html.replace(/`(.+?)`/g, '<code style="background:var(--bg2);padding:2px 6px;border-radius:4px;font-size:0.85rem">$1</code>');
-  // Line breaks
-  html = html.replace(/\n/g, '<br>');
+function showSettings(){$('settingsModal').classList.add('show');}
+function closeSettings(){$('settingsModal').classList.remove('show');}
+function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,120)+'px';}
+function scrollChat(){$('chatArea').scrollTop=$('chatArea').scrollHeight;}
+function escapeHtml(t){const d=document.createElement('div');d.textContent=t||'';return d.innerHTML;}
+function formatMarkdown(text){
+  if(!text)return '';
+  let html=escapeHtml(text);
+  html=html.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+  html=html.replace(/\*(.+?)\*/g,'<em>$1</em>');
+  html=html.replace(/```([\s\S]+?)```/g,'<pre style="background:var(--bg2);padding:8px;border-radius:8px;overflow-x:auto;font-size:0.82rem;margin:6px 0">$1</pre>');
+  html=html.replace(/`(.+?)`/g,'<code style="background:var(--bg2);padding:2px 6px;border-radius:4px;font-size:0.85rem">$1</code>');
+  html=html.replace(/\n/g,'<br>');
   return html;
 }
-
-// Initial welcome
+function showToast(msg){
+  const t=document.createElement('div');t.className='toast';t.textContent=msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),3000);
+}
 scrollChat();
 </script>
 </body>
